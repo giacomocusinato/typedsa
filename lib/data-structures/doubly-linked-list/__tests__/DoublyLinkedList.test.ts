@@ -273,4 +273,14 @@ describe('DoublyLinkedList', () => {
     expect(getArrayFromIteratedList(array2)).toMatchObject(array2);
     expect(getArrayFromIteratedList(array3)).toMatchObject(array3);
   });
+
+  test('reverse', () => {
+    list.reverse();
+
+    const arr = [1, 2, 3, 4];
+    list = DoublyLinkedList.fromArray(arr);
+    list.reverse();
+
+    expect(list.toArray()).toMatchObject(arr.reverse());
+  });
 });

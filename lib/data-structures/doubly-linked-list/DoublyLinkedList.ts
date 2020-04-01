@@ -254,6 +254,25 @@ export class DoublyLinkedList<T> implements Collection<T> {
   }
 
   /**
+   * Reverses the sequence of nodes in the DoublyLinkedList<T>
+   */
+  public reverse(): void {
+    if (this._length > 1) {
+      let curr = this._first;
+      let temp: DoublyLinkedListNode<T> | null = null;
+      while (curr) {
+        temp = curr.prev;
+        curr.prev = curr.next;
+        curr.next = temp;
+        curr = curr.prev;
+      }
+      temp = this._first;
+      this._first = this._last;
+      this._last = temp;
+    }
+  }
+
+  /**
    * Implements the iteration behavior for the DoublyLinkedList<T>;
    */
   [Symbol.iterator]() {
