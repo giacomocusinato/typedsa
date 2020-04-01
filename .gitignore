@@ -1,0 +1,6 @@
+.DS_Store
+
+/dist
+/coverage
+/docs
+node_modules
