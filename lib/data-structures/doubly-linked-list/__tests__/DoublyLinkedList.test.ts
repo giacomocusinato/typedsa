@@ -285,7 +285,7 @@ describe('DoublyLinkedList', () => {
     expect(list.toArray()).toMatchObject(arr.reverse());
   });
 
-  test.only('sort', () => {
+  test('sort', () => {
     let arr = [];
     list.sort();
     expect(list.first).toBeNull;
