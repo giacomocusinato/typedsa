@@ -90,7 +90,8 @@ describe('DoublyLinkedList', () => {
 
   test('add', () => {
     let spy = jest.spyOn(list, 'addLast').mockReturnValueOnce();
-    list.add(0);
+    const { add } = list; // @bind test
+    add(0);
 
     expect(spy).toBeCalledWith(new DoublyLinkedListNode(0));
   });
@@ -282,5 +283,34 @@ describe('DoublyLinkedList', () => {
     list.reverse();
 
     expect(list.toArray()).toMatchObject(arr.reverse());
+  });
+
+  test.only('sort', () => {
+    let arr = [];
+    list.sort();
+    expect(list.first).toBeNull;
+
+    arr = [9, 7, 8, 1, 3, 2];
+    list = DoublyLinkedList.fromArray(arr);
+    list.sort();
+    expect(list.toArray()).toMatchObject(arr.sort());
+
+    arr = [1, 8, 1, 2];
+    list = DoublyLinkedList.fromArray(arr);
+    list.sort();
+    expect(list.toArray()).toMatchObject(arr.sort());
+
+    arr = [1, 8, 1, 2];
+    list = DoublyLinkedList.fromArray(arr);
+    list.sort((a, b) => {
+      if (!a || !b) return a ? -1 : b ? 1 : 0;
+      return b.value - a.value;
+    });
+    expect(list.toArray()).toMatchObject(arr.sort().reverse());
+
+    arr = [1, null, 2];
+    const anotherList = DoublyLinkedList.fromArray<number | null>(arr);
+    anotherList.sort();
+    expect(anotherList.toArray()).toMatchObject([1, 2, null]);
   });
 });

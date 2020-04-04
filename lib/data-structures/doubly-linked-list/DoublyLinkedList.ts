@@ -1,6 +1,7 @@
+import bind from 'bind-decorator';
+import { ArgumentNullError, InvalidOperationError } from '../../errors';
 import { Collection } from '../Collection';
 import { DoublyLinkedListNode } from './DoublyLinkedListNode';
-import { ArgumentNullError, InvalidOperationError } from '../../errors';
 
 /**
  * Represents a doubly linked list.
@@ -43,6 +44,16 @@ export class DoublyLinkedList<T> implements Collection<T> {
   private _last: DoublyLinkedListNode<T> | null = null;
   public get last() {
     return this._last;
+  }
+
+  /**
+   * Adds an item at the end of the DoublyLinkedList<T>.
+   * @remarks Implements add() method from the Collection<T> interface.
+   * @param {T} item - The object to add to the DoublyLinkedList<T>.
+   */
+  @bind
+  public add(item: T): void {
+    this.addLast(new DoublyLinkedListNode<T>(item));
   }
 
   /**
@@ -104,15 +115,32 @@ export class DoublyLinkedList<T> implements Collection<T> {
   }
 
   /**
-   * Adds an item at the end of the DoublyLinkedList<T>.
-   *
-   * @remarks
-   * Implements add() method from the Collection<T> interface.
-   *
-   * @param {T} item - The object to add to the DoublyLinkedList<T>.
+   * Adds the specified new node at the end of the DoublyLinkedList<T>.
+   * @param {DoublyLinkedListNode<T>} node - The new DoublyLinkedListNode<T> to add at the start of the DoublyLinkedList<T>.
+   * @throws {ArgumentNullError} - node is null.
+   * @throws {InvalidOperationError} - node belongs to another list.
    */
-  public add(item: T): void {
-    this.addLast(new DoublyLinkedListNode<T>(item));
+  public addAfter(node: DoublyLinkedListNode<T>): void {
+    if (!node) {
+      throw new ArgumentNullError('node');
+    }
+
+    if (node.list !== null) {
+      throw new InvalidOperationError(
+        'node already belongs to another DoublyLinkedList<T>'
+      );
+    }
+
+    if (this._last) {
+      node.prev = this._last;
+      this._last.next = node;
+      this._last = node;
+    } else {
+      this._first = node;
+      this._last = node;
+    }
+    node.list = this;
+    this._length++;
   }
 
   /**
@@ -270,6 +298,88 @@ export class DoublyLinkedList<T> implements Collection<T> {
       this._first = this._last;
       this._last = temp;
     }
+  }
+
+  /**
+   * Sorts the elements of the DoublyLinkedList<T>.
+   * @param compareFn Specifies a function that defines the sort order.
+   * Defaults to JavaScript equals, grater than and less then operators on node.value.
+   * @param {DoublyLinkedListNode<E>} compareFn.firstEl - First element to compare.
+   * @param {DoublyLinkedListNode<E>} compareFn.secondEl - Second element to compare.
+   */
+  @bind
+  public sort(compareFn = this.defaultCompareFn): void {
+    function mergeSort(
+      head: DoublyLinkedListNode<T> | null
+    ): DoublyLinkedListNode<T> | null {
+      if (!head || !head.next) {
+        return head;
+      }
+      let second = split(head);
+      head = mergeSort(head);
+      second = mergeSort(second);
+      return merge(head, second);
+    }
+    function merge(
+      first: DoublyLinkedListNode<T> | null,
+      second: DoublyLinkedListNode<T> | null
+    ): DoublyLinkedListNode<T> | null {
+      if (!first) {
+        return second;
+      }
+      if (!second) {
+        return first;
+      }
+      if (compareFn(first, second) < 0) {
+        first.next = merge(first.next, second);
+        if (first.next) first.next.prev = first;
+        first.prev = null;
+        return first;
+      } else {
+        second.next = merge(first, second.next);
+        if (second.next) second.next.prev = second;
+        second.prev = null;
+        return second;
+      }
+    }
+    function split(head: DoublyLinkedListNode<T>) {
+      let fast = head;
+      let slow = head;
+      while (fast.next && fast.next.next && slow.next) {
+        fast = fast.next.next;
+        slow = slow.next;
+      }
+      const temp = slow.next;
+      slow.next = null;
+      return temp;
+    }
+
+    this._first = mergeSort(this._first);
+    let curr = this._first;
+    while (curr) {
+      if (curr.next == null) {
+        this._last = curr;
+      }
+      curr = curr.next;
+    }
+  }
+
+  /**
+   * Compare two nodes based on the value propery.
+   * @remarks Same implementation as Array.prototype.sort() https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+   * @param {DoublyLinkedListNode<E>} firstEl - First element to compare.
+   * @param {DoublyLinkedListNode<E>} secondEl - Second element to compare.
+   * @returns less than 0, sort firstEl to an index lower than secondEl, returns 0, leave both unchanged with respect to each other,
+   * returns greater than 0, sort firstEl to an index lower than secondEl
+   */
+  private defaultCompareFn(
+    firstEl: DoublyLinkedListNode<T> | null,
+    secondEl: DoublyLinkedListNode<T> | null
+  ): number {
+    if (firstEl == null || firstEl.value == null) return 1;
+    if (secondEl == null || secondEl.value == null) return -1;
+    if (firstEl.value === secondEl.value) return 0;
+    return firstEl.value < secondEl.value ? -1 : +1;
   }
 
   /**
