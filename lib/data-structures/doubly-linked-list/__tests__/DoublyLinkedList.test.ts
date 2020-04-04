@@ -66,7 +66,7 @@ describe('DoublyLinkedList', () => {
     expect(list.first).toBe(node);
     expect(list.length).toBe(2);
     expect(nodeRef.prev).toBe(node);
-    expect(node.next).toBe(nodeRef);
+    expect(node.prev).toBe(nodeRef);
 
     list.addBefore(5, node);
     expect(list.first?.value).toBe(5);
