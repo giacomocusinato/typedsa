@@ -24,6 +24,44 @@ describe('DoublyLinkedList', () => {
     expect(spy).toBeCalledWith(new DoublyLinkedListNode(0));
   });
 
+  test('addAfter - success', () => {
+    const node = new DoublyLinkedListNode<number>(0);
+    const nodeRef = new DoublyLinkedListNode<number>(0);
+    list.addFirst(nodeRef);
+
+    list.addAfter(node, nodeRef);
+    expect(list.last).toBe(node);
+
+    expect(list.length).toBe(2);
+    expect(node.prev).toBe(nodeRef);
+    expect(nodeRef.next).toBe(node);
+
+    list.addAfter(5, node);
+    expect(list.last?.value).toBe(5);
+    expect(list.length).toBe(3);
+
+    list.addAfter(6, node);
+    expect(list.last?.value).toBe(5);
+    expect(list.length).toBe(4);
+  });
+
+  test('addAfter - errors', () => {
+    expect(() => list.addAfter(0, new DoublyLinkedListNode(0))).toThrow(
+      InvalidOperationError
+    );
+
+    const node = new DoublyLinkedListNode<number>(0);
+    const nodeErr = new DoublyLinkedListNode<number>(0);
+    nodeErr.list = new DoublyLinkedList<number>();
+    list.addFirst(node);
+    expect(() => list.addAfter(nodeErr, node)).toThrow(InvalidOperationError);
+
+    nodeErr.list = null;
+    expect(() => list.addAfter(new DoublyLinkedListNode(0), nodeErr)).toThrow(
+      InvalidOperationError
+    );
+  });
+
   test('addFirst - success', () => {
     const node1 = new DoublyLinkedListNode<number>(0);
     list.addFirst(node1);
@@ -312,5 +350,10 @@ describe('DoublyLinkedList', () => {
     const anotherList = DoublyLinkedList.fromArray<number | null>(arr);
     anotherList.sort();
     expect(anotherList.toArray()).toMatchObject([1, 2, null]);
+
+    arr = [1, 2];
+    list = DoublyLinkedList.fromArray<number>(arr);
+    list.sort();
+    expect(list.toArray()).toMatchObject([1, 2]);
   });
 });

@@ -115,32 +115,51 @@ export class DoublyLinkedList<T> implements Collection<T> {
   }
 
   /**
-   * Adds the specified new node at the end of the DoublyLinkedList<T>.
-   * @param {DoublyLinkedListNode<T>} node - The new DoublyLinkedListNode<T> to add at the start of the DoublyLinkedList<T>.
-   * @throws {ArgumentNullError} - node is null.
-   * @throws {InvalidOperationError} - node belongs to another list.
+   * Adds the specified new node or value T after the specified existing node in the DoublyLinkedList<T>.
+   * @param {DoublyLinkedListNode<T> | T} newItem - The new LinkedListNode<T> or T to add to the LinkedList<T>.
+   * @param {DoublyLinkedListNode<T>} node - The LinkedListNode<T> after which to insert newItem.
+   * @throws {InvalidOperationError} - node is not in the current list -or- newItem belongs to another list.
    */
-  public addAfter(node: DoublyLinkedListNode<T>): void {
-    if (!node) {
-      throw new ArgumentNullError('node');
-    }
-
-    if (node.list !== null) {
+  public addAfter(
+    newItem: DoublyLinkedListNode<T>,
+    node: DoublyLinkedListNode<T>
+  ): void;
+  public addAfter(newItem: T, node: DoublyLinkedListNode<T>): void;
+  public addAfter(newItem: any, node: DoublyLinkedListNode<T>): void {
+    if (newItem instanceof DoublyLinkedListNode && newItem.list) {
       throw new InvalidOperationError(
         'node already belongs to another DoublyLinkedList<T>'
       );
     }
 
-    if (this._last) {
-      node.prev = this._last;
-      this._last.next = node;
-      this._last = node;
-    } else {
-      this._first = node;
-      this._last = node;
+    if (!this._first) {
+      throw new InvalidOperationError('List is empty');
     }
-    node.list = this;
-    this._length++;
+
+    let curr: DoublyLinkedListNode<T> | null = this._first;
+    while (curr) {
+      if (curr == node) {
+        break;
+      }
+      curr = curr.next;
+    }
+    if (curr) {
+      const newNode =
+        newItem instanceof DoublyLinkedListNode
+          ? newItem
+          : new DoublyLinkedListNode<T>(newItem);
+      const temp = node.next;
+      node.next = newNode;
+      newNode.prev = node;
+      newNode.next = temp;
+      this._length++;
+      if (newNode.next == null) {
+        this._last = newNode;
+      }
+      return;
+    }
+
+    throw new InvalidOperationError('Item not found');
   }
 
   /**
@@ -330,6 +349,7 @@ export class DoublyLinkedList<T> implements Collection<T> {
       if (!second) {
         return first;
       }
+
       if (compareFn(first, second) < 0) {
         first.next = merge(first.next, second);
         if (first.next) first.next.prev = first;
