@@ -25,22 +25,21 @@ describe('DoublyLinkedList', () => {
   });
 
   test('addAfter - success', () => {
+    const newNode = new DoublyLinkedListNode<number>(0);
     const node = new DoublyLinkedListNode<number>(0);
-    const nodeRef = new DoublyLinkedListNode<number>(0);
-    list.addFirst(nodeRef);
+    list.addFirst(node);
 
-    list.addAfter(node, nodeRef);
-    expect(list.last).toBe(node);
-
+    list.addAfter(newNode, node);
+    expect(list.last).toBe(newNode);
     expect(list.length).toBe(2);
-    expect(node.prev).toBe(nodeRef);
-    expect(nodeRef.next).toBe(node);
+    expect(newNode.prev).toBe(node);
+    expect(node.next).toBe(newNode);
 
-    list.addAfter(5, node);
+    list.addAfter(5, newNode);
     expect(list.last?.value).toBe(5);
     expect(list.length).toBe(3);
 
-    list.addAfter(6, node);
+    list.addAfter(6, newNode);
     expect(list.last?.value).toBe(5);
     expect(list.length).toBe(4);
   });
@@ -58,21 +57,22 @@ describe('DoublyLinkedList', () => {
   });
 
   test('addBefore - success', () => {
+    const newNode = new DoublyLinkedListNode<number>(0);
     const node = new DoublyLinkedListNode<number>(0);
-    const nodeRef = new DoublyLinkedListNode<number>(0);
-    list.addFirst(nodeRef);
+    list.addFirst(node);
 
-    list.addBefore(node, nodeRef);
-    expect(list.first).toBe(node);
+    list.addBefore(newNode, node);
+    expect(list.first).toBe(newNode);
     expect(list.length).toBe(2);
-    expect(nodeRef.prev).toBe(node);
-    expect(node.prev).toBe(nodeRef);
+    expect(node.prev).toBe(newNode);
+    expect(newNode.next).toBe(node);
+    expect(newNode.prev).toBe(null);
 
-    list.addBefore(5, node);
+    list.addBefore(5, newNode);
     expect(list.first?.value).toBe(5);
     expect(list.length).toBe(3);
 
-    list.addBefore(6, node);
+    list.addBefore(6, newNode);
     expect(list.first?.value).toBe(5);
     expect(list.length).toBe(4);
   });

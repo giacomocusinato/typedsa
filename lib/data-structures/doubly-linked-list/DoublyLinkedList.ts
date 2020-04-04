@@ -192,6 +192,7 @@ export class DoublyLinkedList<T> implements Collection<T> {
 
   /**
    * Removes the node at the start of the DoublyLinkedList<T>.
+   * @remarks This method is an O(1) operation.
    * @throws {InvalidOperationError} - The DoublyLinkedList<T> is empty.
    */
   public removeFirst(): void {
@@ -250,11 +251,11 @@ export class DoublyLinkedList<T> implements Collection<T> {
     let curr = this._first;
     while (curr) {
       if (item instanceof DoublyLinkedListNode) {
-        if (item.value == curr.value) {
+        if (item === curr) {
           return this.removeNode(curr);
         }
       } else {
-        if (item == curr.value) {
+        if (item === curr.value) {
           return this.removeNode(curr);
         }
       }
@@ -266,7 +267,8 @@ export class DoublyLinkedList<T> implements Collection<T> {
 
   /**
    * Removes all nodes from the DoublyLinkedList<T>.
-   * Implements add() method from the Collection<T> interface.
+   * @remarks Length is set to zero, all node are uncupled from the list. first and last are set to null.
+   * This method is an O(n) operation, where n is length.
    */
   public clear(): void {
     let curr = this._first;
@@ -283,14 +285,14 @@ export class DoublyLinkedList<T> implements Collection<T> {
 
   /**
    * Determines whether a value is in the DoublyLinkedList<T>.
-   * Implements contains() method from the Collection<T> interface.
+   * @remarks This method is an O(n) operation, where n is length.
    * @param {T} item - The value to locate in the DoublyLinkedList<T>.
    * @returns {boolean} - true if value is found in the DoublyLinkedList<T>; otherwise, false.
    */
   public contains(item: T): boolean {
     let curr = this._first;
     while (curr) {
-      if (curr.value == item) {
+      if (curr.value === item) {
         return true;
       }
       curr = curr.next;
@@ -300,13 +302,14 @@ export class DoublyLinkedList<T> implements Collection<T> {
 
   /**
    * Finds the first node that contains the specified value.
+   * @remarks This method is an O(n) operation, where n is length.
    * @param {T} item - The value to locate in the DoublyLinkedList<T>.
    * @returns {DoublyLinkedListNode<T>} - The first DoublyLinkedListNode<T> that contains the specified value, if found; otherwise, null.
    */
   public find(item: T): DoublyLinkedListNode<T> | null {
     let curr = this._first;
     while (curr) {
-      if (curr.value == item) {
+      if (curr.value === item) {
         return curr;
       }
       curr = curr.next;
@@ -316,6 +319,7 @@ export class DoublyLinkedList<T> implements Collection<T> {
 
   /**
    * Returns an array containing all of the nodes values in the DoublyLinkedList<T> in proper sequence.
+   * @remarks This method is an O(n) operation, where n is the array length.
    * @returns {T[]} - The array containing all the nodes values.
    */
   public toArray(): T[] {
