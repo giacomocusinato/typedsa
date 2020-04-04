@@ -55,11 +55,38 @@ describe('DoublyLinkedList', () => {
     nodeErr.list = new DoublyLinkedList<number>();
     list.addFirst(node);
     expect(() => list.addAfter(nodeErr, node)).toThrow(InvalidOperationError);
+  });
 
-    nodeErr.list = null;
-    expect(() => list.addAfter(new DoublyLinkedListNode(0), nodeErr)).toThrow(
+  test('addBefore - success', () => {
+    const node = new DoublyLinkedListNode<number>(0);
+    const nodeRef = new DoublyLinkedListNode<number>(0);
+    list.addFirst(nodeRef);
+
+    list.addBefore(node, nodeRef);
+    expect(list.first).toBe(node);
+    expect(list.length).toBe(2);
+    expect(nodeRef.prev).toBe(node);
+    expect(node.next).toBe(nodeRef);
+
+    list.addBefore(5, node);
+    expect(list.first?.value).toBe(5);
+    expect(list.length).toBe(3);
+
+    list.addBefore(6, node);
+    expect(list.first?.value).toBe(5);
+    expect(list.length).toBe(4);
+  });
+
+  test('addBefore - errors', () => {
+    expect(() => list.addBefore(0, new DoublyLinkedListNode(0))).toThrow(
       InvalidOperationError
     );
+
+    const node = new DoublyLinkedListNode<number>(0);
+    const nodeErr = new DoublyLinkedListNode<number>(0);
+    nodeErr.list = new DoublyLinkedList<number>();
+    list.addFirst(node);
+    expect(() => list.addBefore(nodeErr, node)).toThrow(InvalidOperationError);
   });
 
   test('addFirst - success', () => {

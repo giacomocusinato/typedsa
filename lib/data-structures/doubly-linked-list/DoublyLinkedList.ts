@@ -48,7 +48,7 @@ export class DoublyLinkedList<T> implements Collection<T> {
 
   /**
    * Adds an item at the end of the DoublyLinkedList<T>.
-   * @remarks Implements add() method from the Collection<T> interface.
+   * @remarks Implements add() method from the Collection<T> interface. Invokes addLast methods from the same class.
    * @param {T} item - The object to add to the DoublyLinkedList<T>.
    */
   @bind
@@ -58,6 +58,7 @@ export class DoublyLinkedList<T> implements Collection<T> {
 
   /**
    * Adds the specified new node at the start of the DoublyLinkedList<T>.
+   * @remarks If the LinkedList<T> is empty, the new node becomes the first and the last. This method is an O(1) operation.
    * @param {DoublyLinkedListNode<T>} node - The new DoublyLinkedListNode<T> to add at the start of the DoublyLinkedList<T>.
    * @throws {ArgumentNullError} - node is null.
    * @throws {InvalidOperationError} - node belongs to another list.
@@ -87,6 +88,7 @@ export class DoublyLinkedList<T> implements Collection<T> {
 
   /**
    * Adds the specified new node at the end of the DoublyLinkedList<T>.
+   * @remarks If the LinkedList<T> is empty, the new node becomes the first and the last. This method is an O(1) operation.
    * @param {DoublyLinkedListNode<T>} node - The new DoublyLinkedListNode<T> to add at the start of the DoublyLinkedList<T>.
    * @throws {ArgumentNullError} - node is null.
    * @throws {InvalidOperationError} - node belongs to another list.
@@ -116,6 +118,7 @@ export class DoublyLinkedList<T> implements Collection<T> {
 
   /**
    * Adds the specified new node or value T after the specified existing node in the DoublyLinkedList<T>.
+   * @remarks This method is an O(1) operation.
    * @param {DoublyLinkedListNode<T> | T} newItem - The new LinkedListNode<T> or T to add to the LinkedList<T>.
    * @param {DoublyLinkedListNode<T>} node - The LinkedListNode<T> after which to insert newItem.
    * @throws {InvalidOperationError} - node is not in the current list -or- newItem belongs to another list.
@@ -131,35 +134,60 @@ export class DoublyLinkedList<T> implements Collection<T> {
         'node already belongs to another DoublyLinkedList<T>'
       );
     }
-
-    if (!this._first) {
-      throw new InvalidOperationError('List is empty');
+    if (node.list !== this || this._length === 0) {
+      throw new InvalidOperationError('node is not in the list');
     }
 
-    let curr: DoublyLinkedListNode<T> | null = this._first;
-    while (curr) {
-      if (curr == node) {
-        break;
-      }
-      curr = curr.next;
+    const newNode =
+      newItem instanceof DoublyLinkedListNode
+        ? newItem
+        : new DoublyLinkedListNode<T>(newItem);
+    const temp = node.next;
+    node.next = newNode;
+    newNode.prev = node;
+    newNode.next = temp;
+    newNode.list = this;
+    this._length++;
+    if (newNode.next === null) {
+      this._last = newNode;
     }
-    if (curr) {
-      const newNode =
-        newItem instanceof DoublyLinkedListNode
-          ? newItem
-          : new DoublyLinkedListNode<T>(newItem);
-      const temp = node.next;
-      node.next = newNode;
-      newNode.prev = node;
-      newNode.next = temp;
-      this._length++;
-      if (newNode.next == null) {
-        this._last = newNode;
-      }
-      return;
+  }
+
+  /**
+   * Adds the specified new node or value T before the specified existing node in the DoublyLinkedList<T>.
+   * @remarks This method is an O(1) operation.
+   * @param {DoublyLinkedListNode<T> | T} newItem - The new LinkedListNode<T> or T to add to the LinkedList<T>.
+   * @param {DoublyLinkedListNode<T>} node - The LinkedListNode<T> before which to insert newItem.
+   * @throws {InvalidOperationError} - node is not in the current list -or- newItem belongs to another list.
+   */
+  public addBefore(
+    newItem: DoublyLinkedListNode<T>,
+    node: DoublyLinkedListNode<T>
+  ): void;
+  public addBefore(newItem: T, node: DoublyLinkedListNode<T>): void;
+  public addBefore(newItem: any, node: DoublyLinkedListNode<T>): void {
+    if (newItem instanceof DoublyLinkedListNode && newItem.list) {
+      throw new InvalidOperationError(
+        'node already belongs to another DoublyLinkedList<T>'
+      );
+    }
+    if (node.list !== this || this._length === 0) {
+      throw new InvalidOperationError('node is not in the list');
     }
 
-    throw new InvalidOperationError('Item not found');
+    const newNode =
+      newItem instanceof DoublyLinkedListNode
+        ? newItem
+        : new DoublyLinkedListNode<T>(newItem);
+    const temp = node.prev;
+    node.prev = newNode;
+    newNode.next = node;
+    newNode.prev = temp;
+    newNode.list = this;
+    this._length++;
+    if (newNode.prev === null) {
+      this._first = newNode;
+    }
   }
 
   /**
