@@ -12,11 +12,11 @@ export class LinkedList<T> implements Collection<T> {
   /**
    * Generates a LinkedList<T> from an array containing values of type T.
    * @param {T[]} array - An array containing elements of type T.
-   * @returns {LinkedList[]} - The LinkedList<T> matching the array.
+   * @returns {LinkedList<T>} - The LinkedList<T> matching the array.
    */
   public static fromArray<E>(array: E[]): LinkedList<E> {
     const linkedList = new LinkedList<E>();
-    array.forEach(item => {
+    array.forEach((item) => {
       linkedList.add(item);
     });
     return linkedList;
@@ -394,19 +394,15 @@ export class LinkedList<T> implements Collection<T> {
   /**
    * Implements the iteration behavior for the LinkedList<T>;
    */
-  [Symbol.iterator]() {
-    let nextNode: LinkedListNode<T> | null = this._first;
-    return {
-      next() {
-        if (nextNode == null) return { done: true };
-
-        const value = nextNode;
-        nextNode = nextNode.next;
-
-        return { value, done: false };
-      }
-    };
+  @bind
+  *iterator(): Generator<LinkedListNode<T>> {
+    let curr = this._first;
+    while (curr) {
+      yield curr;
+      curr = curr.next;
+    }
   }
+  [Symbol.iterator] = this.iterator;
 
   /**
    * Removes a node from the LinkedList<T>
