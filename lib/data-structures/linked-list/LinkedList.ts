@@ -221,6 +221,7 @@ export class LinkedList<T> implements Collection<T> {
           return this.removeNode(curr, currPrev);
         }
       }
+      currPrev = curr;
       curr = curr.next;
     }
 
@@ -297,22 +298,19 @@ export class LinkedList<T> implements Collection<T> {
   /**
    * Reverses the sequence of nodes in the LinkedList<T>
    */
-
-  // public reverse(): void {
-  //   if (this._length > 1) {
-  //     let curr = this._first;
-  //     let temp: LinkedListNode<T> | null = null;
-  //     while (curr) {
-  //       temp = curr.prev;
-  //       curr.prev = curr.next;
-  //       curr.next = temp;
-  //       curr = curr.prev;
-  //     }
-  //     temp = this._first;
-  //     this._first = this._last;
-  //     this._last = temp;
-  //   }
-  // }
+  public reverse(): void {
+    if (this._first?.next) {
+      let curr: LinkedListNode<T> | null = this._first.next;
+      this._first.next = null; // initial first becomes last
+      while (curr) {
+        let nextCurr: LinkedListNode<T> | null = curr.next;
+        let prevFirst = this._first;
+        this._first = curr;
+        this._first.next = prevFirst;
+        curr = nextCurr;
+      }
+    }
+  }
 
   /**
    * Sorts the elements of the LinkedList<T>.

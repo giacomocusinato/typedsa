@@ -1,36 +1,30 @@
-import { DoublyLinkedListNode } from '../DoublyLinkedListNode';
-import { DoublyLinkedList } from '../DoublyLinkedList';
+import { LinkedListNode } from '../LinkedListNode';
+import { LinkedList } from '../LinkedList';
 
-describe('DoublyLinkedList', () => {
+describe('LinkedList', () => {
   test('construct - empty', () => {
-    const node = new DoublyLinkedListNode<number>(0);
+    const node = new LinkedListNode<number>(0);
 
     expect(node.value).toBe(0);
     expect(node.next).toBe(null);
-    expect(node.prev).toBe(null);
   });
 
   test('construct - linked', () => {
-    const node = new DoublyLinkedListNode<number>(1);
-    const prev = new DoublyLinkedListNode<number>(0);
-    const next = new DoublyLinkedListNode<number>(2);
-    node.prev = prev;
+    const node = new LinkedListNode<number>(1);
+    const prev = new LinkedListNode<number>(0);
+    const next = new LinkedListNode<number>(2);
     node.next = next;
 
-    expect(node.next).toBeInstanceOf(DoublyLinkedListNode);
-    expect(node.prev).toBeInstanceOf(DoublyLinkedListNode);
+    expect(node.next).toBeInstanceOf(LinkedListNode);
     expect(node.next.value).toBe(2);
-    expect(node.prev.value).toBe(0);
   });
 
   test('clear', () => {
-    const node = new DoublyLinkedListNode<number>(1);
-    node.prev = new DoublyLinkedListNode<number>(0);
-    node.next = new DoublyLinkedListNode<number>(2);
-    node.list = new DoublyLinkedList<number>();
+    const node = new LinkedListNode<number>(1);
+    node.next = new LinkedListNode<number>(2);
+    node.list = new LinkedList<number>();
     node.uncouple();
 
-    expect(node.prev).toBeNull();
     expect(node.next).toBeNull();
     expect(node.list).toBeNull();
   });

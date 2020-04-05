@@ -1,14 +1,14 @@
 import { ArgumentNullError, InvalidOperationError } from '../../../errors';
-import { DoublyLinkedList } from '../DoublyLinkedList';
-import { DoublyLinkedListNode } from '../DoublyLinkedListNode';
+import { LinkedList } from '../LinkedList';
+import { LinkedListNode } from '../LinkedListNode';
 
-describe('DoublyLinkedList', () => {
-  let list: DoublyLinkedList<number>;
-  let listCompare: DoublyLinkedList<number>;
+describe('LinkedList', () => {
+  let list: LinkedList<number>;
+  let listCompare: LinkedList<number>;
 
   beforeEach(() => {
-    list = new DoublyLinkedList<number>();
-    listCompare = new DoublyLinkedList<number>();
+    list = new LinkedList<number>();
+    listCompare = new LinkedList<number>();
   });
 
   test('contruct', () => {
@@ -21,61 +21,54 @@ describe('DoublyLinkedList', () => {
     let spy = jest.spyOn(list, 'addLast').mockReturnValueOnce();
     list.add(0);
 
-    expect(spy).toBeCalledWith(new DoublyLinkedListNode(0));
+    expect(spy).toBeCalledWith(new LinkedListNode(0));
   });
 
   test('addAfter - success', () => {
-    const node = new DoublyLinkedListNode<number>(0);
-    const nodeRef = new DoublyLinkedListNode<number>(0);
-    list.addFirst(nodeRef);
+    const newNode = new LinkedListNode<number>(0);
+    const node = new LinkedListNode<number>(0);
+    list.addFirst(node);
 
-    list.addAfter(node, nodeRef);
-    expect(list.last).toBe(node);
-
+    list.addAfter(newNode, node);
+    expect(list.last).toBe(newNode);
     expect(list.length).toBe(2);
-    expect(node.prev).toBe(nodeRef);
-    expect(nodeRef.next).toBe(node);
+    expect(node.next).toBe(newNode);
 
-    list.addAfter(5, node);
+    list.addAfter(5, newNode);
     expect(list.last?.value).toBe(5);
     expect(list.length).toBe(3);
 
-    list.addAfter(6, node);
+    list.addAfter(6, newNode);
     expect(list.last?.value).toBe(5);
     expect(list.length).toBe(4);
   });
 
   test('addAfter - errors', () => {
-    expect(() => list.addAfter(0, new DoublyLinkedListNode(0))).toThrow(
+    expect(() => list.addAfter(0, new LinkedListNode(0))).toThrow(
       InvalidOperationError
     );
 
-    const node = new DoublyLinkedListNode<number>(0);
-    const nodeErr = new DoublyLinkedListNode<number>(0);
-    nodeErr.list = new DoublyLinkedList<number>();
+    const node = new LinkedListNode<number>(0);
+    const nodeErr = new LinkedListNode<number>(0);
+    nodeErr.list = new LinkedList<number>();
     list.addFirst(node);
     expect(() => list.addAfter(nodeErr, node)).toThrow(InvalidOperationError);
-
-    nodeErr.list = null;
-    expect(() => list.addAfter(new DoublyLinkedListNode(0), nodeErr)).toThrow(
-      InvalidOperationError
-    );
   });
 
   test('addFirst - success', () => {
-    const node1 = new DoublyLinkedListNode<number>(0);
+    const node1 = new LinkedListNode<number>(0);
     list.addFirst(node1);
     expect(list.first).toBe(node1);
     expect(list.last).toBe(node1);
     expect(list.length).toBe(1);
 
-    const node2 = new DoublyLinkedListNode<number>(0);
+    const node2 = new LinkedListNode<number>(0);
     list.addFirst(node2);
     expect(list.first).toBe(node2);
     expect(list.last).toBe(node1);
     expect(list.length).toBe(2);
 
-    const node3 = new DoublyLinkedListNode<number>(0);
+    const node3 = new LinkedListNode<number>(0);
     list.addFirst(node3);
     expect(list.first).toBe(node3);
     expect(list.last).toBe(node1);
@@ -88,26 +81,26 @@ describe('DoublyLinkedList', () => {
   });
 
   test('addFirst - throws InvalidOperationError', () => {
-    const node = new DoublyLinkedListNode<number>(0);
+    const node = new LinkedListNode<number>(0);
     listCompare.addFirst(node);
 
     expect(() => list.addFirst(node)).toThrow(InvalidOperationError);
   });
 
   test('addLast - success', () => {
-    const node1 = new DoublyLinkedListNode<number>(0);
+    const node1 = new LinkedListNode<number>(0);
     list.addLast(node1);
     expect(list.first).toBe(node1);
     expect(list.last).toBe(node1);
     expect(list.length).toBe(1);
 
-    const node2 = new DoublyLinkedListNode<number>(0);
+    const node2 = new LinkedListNode<number>(0);
     list.addLast(node2);
     expect(list.first).toBe(node1);
     expect(list.last).toBe(node2);
     expect(list.length).toBe(2);
 
-    const node3 = new DoublyLinkedListNode<number>(0);
+    const node3 = new LinkedListNode<number>(0);
     list.addLast(node3);
     expect(list.first).toBe(node1);
     expect(list.last).toBe(node3);
@@ -120,7 +113,7 @@ describe('DoublyLinkedList', () => {
   });
 
   test('addLast - InvalidOperationError', () => {
-    const node = new DoublyLinkedListNode<number>(0);
+    const node = new LinkedListNode<number>(0);
     listCompare.addFirst(node);
 
     expect(() => list.addLast(node)).toThrow(InvalidOperationError);
@@ -131,22 +124,21 @@ describe('DoublyLinkedList', () => {
     const { add } = list; // @bind test
     add(0);
 
-    expect(spy).toBeCalledWith(new DoublyLinkedListNode(0));
+    expect(spy).toBeCalledWith(new LinkedListNode(0));
   });
 
   test('remove - success', () => {
-    let nodes: DoublyLinkedListNode<number>[] = [];
+    let nodes: LinkedListNode<number>[] = [];
     function makeList() {
       nodes = [
-        new DoublyLinkedListNode<number>(1),
-        new DoublyLinkedListNode<number>(3),
-        new DoublyLinkedListNode<number>(5)
+        new LinkedListNode<number>(1),
+        new LinkedListNode<number>(3),
+        new LinkedListNode<number>(5)
       ];
-      list = new DoublyLinkedList<number>();
+      list = new LinkedList<number>();
       list.addLast(nodes[0]);
       list.addLast(nodes[1]);
       list.addLast(nodes[2]);
-      return nodes;
     }
 
     makeList();
@@ -186,7 +178,7 @@ describe('DoublyLinkedList', () => {
   });
 
   test('remove - fail', () => {
-    const node = new DoublyLinkedListNode<number>(0);
+    const node = new LinkedListNode<number>(0);
     list.addLast(node);
     node.list = null;
 
@@ -235,9 +227,9 @@ describe('DoublyLinkedList', () => {
 
   test('clear', () => {
     const nodes = [
-      new DoublyLinkedListNode<number>(0),
-      new DoublyLinkedListNode<number>(1),
-      new DoublyLinkedListNode<number>(2)
+      new LinkedListNode<number>(0),
+      new LinkedListNode<number>(1),
+      new LinkedListNode<number>(2)
     ];
     nodes.forEach(node => list.addLast(node));
     list.clear();
@@ -247,7 +239,6 @@ describe('DoublyLinkedList', () => {
     expect(list.last).toBeNull();
     nodes.forEach(node => {
       expect(node.next).toBeNull();
-      expect(node.prev).toBeNull();
       expect(node.list).toBeNull();
     });
   });
@@ -282,7 +273,7 @@ describe('DoublyLinkedList', () => {
 
   test('fromArray', () => {
     const arr = [1, 2, 5];
-    list = DoublyLinkedList.fromArray<number>(arr);
+    list = LinkedList.fromArray<number>(arr);
 
     const arrCompare: number[] = [];
     for (const node of list) {
@@ -295,7 +286,7 @@ describe('DoublyLinkedList', () => {
 
   test('iterator', () => {
     function getArrayFromIteratedList(arr: number[]) {
-      list = new DoublyLinkedList<number>();
+      list = new LinkedList<number>();
       arr.forEach(item => list.add(item));
       const listArray = [];
       for (const node of list) {
@@ -316,44 +307,44 @@ describe('DoublyLinkedList', () => {
   test('reverse', () => {
     list.reverse();
 
-    const arr = [1, 2, 3, 4];
-    list = DoublyLinkedList.fromArray(arr);
+    const arr = [1, 2, 5, 6, 8];
+    list = LinkedList.fromArray(arr);
     list.reverse();
 
     expect(list.toArray()).toMatchObject(arr.reverse());
   });
 
-  test('sort', () => {
-    let arr = [];
-    list.sort();
-    expect(list.first).toBeNull;
+  // test('sort', () => {
+  //   let arr = [];
+  //   list.sort();
+  //   expect(list.first).toBeNull;
 
-    arr = [9, 7, 8, 1, 3, 2];
-    list = DoublyLinkedList.fromArray(arr);
-    list.sort();
-    expect(list.toArray()).toMatchObject(arr.sort());
+  //   arr = [9, 7, 8, 1, 3, 2];
+  //   list = LinkedList.fromArray(arr);
+  //   list.sort();
+  //   expect(list.toArray()).toMatchObject(arr.sort());
 
-    arr = [1, 8, 1, 2];
-    list = DoublyLinkedList.fromArray(arr);
-    list.sort();
-    expect(list.toArray()).toMatchObject(arr.sort());
+  //   arr = [1, 8, 1, 2];
+  //   list = LinkedList.fromArray(arr);
+  //   list.sort();
+  //   expect(list.toArray()).toMatchObject(arr.sort());
 
-    arr = [1, 8, 1, 2];
-    list = DoublyLinkedList.fromArray(arr);
-    list.sort((a, b) => {
-      if (!a || !b) return a ? -1 : b ? 1 : 0;
-      return b.value - a.value;
-    });
-    expect(list.toArray()).toMatchObject(arr.sort().reverse());
+  //   arr = [1, 8, 1, 2];
+  //   list = LinkedList.fromArray(arr);
+  //   list.sort((a, b) => {
+  //     if (!a || !b) return a ? -1 : b ? 1 : 0;
+  //     return b.value - a.value;
+  //   });
+  //   expect(list.toArray()).toMatchObject(arr.sort().reverse());
 
-    arr = [1, null, 2];
-    const anotherList = DoublyLinkedList.fromArray<number | null>(arr);
-    anotherList.sort();
-    expect(anotherList.toArray()).toMatchObject([1, 2, null]);
+  //   arr = [1, null, 2];
+  //   const anotherList = LinkedList.fromArray<number | null>(arr);
+  //   anotherList.sort();
+  //   expect(anotherList.toArray()).toMatchObject([1, 2, null]);
 
-    arr = [1, 2];
-    list = DoublyLinkedList.fromArray<number>(arr);
-    list.sort();
-    expect(list.toArray()).toMatchObject([1, 2]);
-  });
+  //   arr = [1, 2];
+  //   list = LinkedList.fromArray<number>(arr);
+  //   list.sort();
+  //   expect(list.toArray()).toMatchObject([1, 2]);
+  // });
 });
