@@ -53,8 +53,7 @@ export class Stack<T> {
   }
 
   /**
-   * Remove and returns the first element of the Stack<T>.
-   * @params {T} item - The object push on the Stack<T>.
+   * Removes and returns the first element of the Stack<T>.
    * @remarks This method is an O(1) operation.
    */
   @bind
