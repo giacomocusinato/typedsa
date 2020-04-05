@@ -209,8 +209,15 @@ describe('LinkedList', () => {
   test('removeLast - success', () => {
     list.add(1);
     list.add(2);
-    list.removeLast();
+    list.add(3);
 
+    list.removeLast();
+    expect(list.toArray()).toMatchObject([1, 2]);
+    expect(list.first?.value).toBe(1);
+    expect(list.last?.value).toBe(2);
+    expect(list.length).toBe(2);
+
+    list.removeLast();
     expect(list.toArray()).toMatchObject([1]);
     expect(list.first?.value).toBe(1);
     expect(list.last?.value).toBe(1);
@@ -314,37 +321,37 @@ describe('LinkedList', () => {
     expect(list.toArray()).toMatchObject(arr.reverse());
   });
 
-  // test('sort', () => {
-  //   let arr = [];
-  //   list.sort();
-  //   expect(list.first).toBeNull;
+  test('sort', () => {
+    let arr = [];
+    list.sort();
+    expect(list.first).toBeNull;
 
-  //   arr = [9, 7, 8, 1, 3, 2];
-  //   list = LinkedList.fromArray(arr);
-  //   list.sort();
-  //   expect(list.toArray()).toMatchObject(arr.sort());
+    arr = [1, 9, 7, 8, 1, 2, 3, 2];
+    list = LinkedList.fromArray(arr);
+    list.sort();
+    expect(list.toArray()).toMatchObject(arr.sort());
 
-  //   arr = [1, 8, 1, 2];
-  //   list = LinkedList.fromArray(arr);
-  //   list.sort();
-  //   expect(list.toArray()).toMatchObject(arr.sort());
+    arr = [1, 8, 1, 2];
+    list = LinkedList.fromArray(arr);
+    list.sort();
+    expect(list.toArray()).toMatchObject(arr.sort());
 
-  //   arr = [1, 8, 1, 2];
-  //   list = LinkedList.fromArray(arr);
-  //   list.sort((a, b) => {
-  //     if (!a || !b) return a ? -1 : b ? 1 : 0;
-  //     return b.value - a.value;
-  //   });
-  //   expect(list.toArray()).toMatchObject(arr.sort().reverse());
+    arr = [1, 8, 1, 2];
+    list = LinkedList.fromArray(arr);
+    list.sort((a, b) => {
+      if (!a || !b) return a ? -1 : b ? 1 : 0;
+      return b.value - a.value;
+    });
+    expect(list.toArray()).toMatchObject(arr.sort().reverse());
 
-  //   arr = [1, null, 2];
-  //   const anotherList = LinkedList.fromArray<number | null>(arr);
-  //   anotherList.sort();
-  //   expect(anotherList.toArray()).toMatchObject([1, 2, null]);
+    arr = [1, null, 2];
+    const anotherList = LinkedList.fromArray<number | null>(arr);
+    anotherList.sort();
+    expect(anotherList.toArray()).toMatchObject([1, 2, null]);
 
-  //   arr = [1, 2];
-  //   list = LinkedList.fromArray<number>(arr);
-  //   list.sort();
-  //   expect(list.toArray()).toMatchObject([1, 2]);
-  // });
+    arr = [1, 2];
+    list = LinkedList.fromArray<number>(arr);
+    list.sort();
+    expect(list.toArray()).toMatchObject([1, 2]);
+  });
 });

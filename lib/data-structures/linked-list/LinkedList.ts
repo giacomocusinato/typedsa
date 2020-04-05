@@ -319,63 +319,59 @@ export class LinkedList<T> implements Collection<T> {
    * @param {LinkedListNode<E>} compareFn.firstEl - First element to compare.
    * @param {LinkedListNode<E>} compareFn.secondEl - Second element to compare.
    */
-  // @bind
-  // public sort(compareFn = this.defaultCompareFn): void {
-  //   function mergeSort(
-  //     head: LinkedListNode<T> | null
-  //   ): LinkedListNode<T> | null {
-  //     if (!head || !head.next) {
-  //       return head;
-  //     }
-  //     let second = split(head);
-  //     head = mergeSort(head);
-  //     second = mergeSort(second);
-  //     return merge(head, second);
-  //   }
-  //   function merge(
-  //     first: LinkedListNode<T> | null,
-  //     second: LinkedListNode<T> | null
-  //   ): LinkedListNode<T> | null {
-  //     if (!first) {
-  //       return second;
-  //     }
-  //     if (!second) {
-  //       return first;
-  //     }
+  @bind
+  public sort(compareFn = this.defaultCompareFn): void {
+    function mergeSort(
+      head: LinkedListNode<T> | null
+    ): LinkedListNode<T> | null {
+      if (!head || !head.next) {
+        return head;
+      }
+      let second = split(head);
+      head = mergeSort(head);
+      second = mergeSort(second);
+      return merge(head, second);
+    }
+    function merge(
+      first: LinkedListNode<T> | null,
+      second: LinkedListNode<T> | null
+    ): LinkedListNode<T> | null {
+      if (!first) {
+        return second;
+      }
+      if (!second) {
+        return first;
+      }
 
-  //     if (compareFn(first, second) < 0) {
-  //       first.next = merge(first.next, second);
-  //       if (first.next) first.next.prev = first;
-  //       first.prev = null;
-  //       return first;
-  //     } else {
-  //       second.next = merge(first, second.next);
-  //       if (second.next) second.next.prev = second;
-  //       second.prev = null;
-  //       return second;
-  //     }
-  //   }
-  //   function split(head: LinkedListNode<T>) {
-  //     let fast = head;
-  //     let slow = head;
-  //     while (fast.next && fast.next.next && slow.next) {
-  //       fast = fast.next.next;
-  //       slow = slow.next;
-  //     }
-  //     const temp = slow.next;
-  //     slow.next = null;
-  //     return temp;
-  //   }
+      if (compareFn(first, second) < 0) {
+        first.next = merge(first.next, second);
+        return first;
+      } else {
+        second.next = merge(first, second.next);
+        return second;
+      }
+    }
+    function split(head: LinkedListNode<T>) {
+      let fast = head;
+      let slow = head;
+      while (fast.next && fast.next.next && slow.next) {
+        fast = fast.next.next;
+        slow = slow.next;
+      }
+      const temp = slow.next;
+      slow.next = null;
+      return temp;
+    }
 
-  //   this._first = mergeSort(this._first);
-  //   let curr = this._first;
-  //   while (curr) {
-  //     if (curr.next == null) {
-  //       this._last = curr;
-  //     }
-  //     curr = curr.next;
-  //   }
-  // }
+    this._first = mergeSort(this._first);
+    let curr = this._first;
+    while (curr) {
+      if (curr.next == null) {
+        this._last = curr;
+      }
+      curr = curr.next;
+    }
+  }
 
   /**
    * Compare two nodes based on the value propery.
