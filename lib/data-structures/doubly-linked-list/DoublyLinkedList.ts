@@ -16,7 +16,7 @@ export class DoublyLinkedList<T> implements Collection<T> {
    */
   public static fromArray<E>(array: E[]): DoublyLinkedList<E> {
     const doublyLinkedList = new DoublyLinkedList<E>();
-    array.forEach(item => {
+    array.forEach((item) => {
       doublyLinkedList.add(item);
     });
     return doublyLinkedList;
@@ -447,7 +447,7 @@ export class DoublyLinkedList<T> implements Collection<T> {
         nextNode = nextNode.next;
 
         return { value, done: false };
-      }
+      },
     };
   }
 
