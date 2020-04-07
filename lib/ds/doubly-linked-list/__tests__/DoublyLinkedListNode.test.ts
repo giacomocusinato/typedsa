@@ -1,5 +1,5 @@
-import { DoublyLinkedListNode } from '../DoublyLinkedListNode';
 import { DoublyLinkedList } from '../DoublyLinkedList';
+import { DoublyLinkedListNode } from '../DoublyLinkedListNode';
 
 describe('DoublyLinkedList', () => {
   test('construct - empty', () => {

@@ -1,6 +1,5 @@
-import { InvalidOperationError } from '../../../errors';
-import { LinkedList } from '../../linked-list/LinkedList';
-import { Stack } from '../Stack';
+import { LinkedList, Stack } from '~/ds';
+import { InvalidOperationError } from '~/errors';
 
 describe('Stack', () => {
   let stack: Stack<number>;

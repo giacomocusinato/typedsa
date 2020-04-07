@@ -1,8 +1,6 @@
 import bind from 'bind-decorator';
-import { InvalidOperationError } from '../../errors';
-import { DoublyLinkedList } from '../doubly-linked-list/DoublyLinkedList';
-import { LinkedList } from '../linked-list/LinkedList';
-import { LinkedListNode } from '../linked-list/LinkedListNode';
+import { DoublyLinkedList, LinkedList, LinkedListNode } from '~/ds';
+import { InvalidOperationError } from '~/errors';
 
 /**
  * Represents a simple last-in-first-out (LIFO) non-generic collection of objects.

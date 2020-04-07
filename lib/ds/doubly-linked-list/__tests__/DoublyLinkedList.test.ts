@@ -167,7 +167,7 @@ describe('DoublyLinkedList', () => {
       nodes = [
         new DoublyLinkedListNode<number>(1),
         new DoublyLinkedListNode<number>(3),
-        new DoublyLinkedListNode<number>(5)
+        new DoublyLinkedListNode<number>(5),
       ];
       list = new DoublyLinkedList<number>();
       list.addLast(nodes[0]);
@@ -264,15 +264,15 @@ describe('DoublyLinkedList', () => {
     const nodes = [
       new DoublyLinkedListNode<number>(0),
       new DoublyLinkedListNode<number>(1),
-      new DoublyLinkedListNode<number>(2)
+      new DoublyLinkedListNode<number>(2),
     ];
-    nodes.forEach(node => list.addLast(node));
+    nodes.forEach((node) => list.addLast(node));
     list.clear();
 
     expect(list.length).toBe(0);
     expect(list.first).toBeNull();
     expect(list.last).toBeNull();
-    nodes.forEach(node => {
+    nodes.forEach((node) => {
       expect(node.next).toBeNull();
       expect(node.prev).toBeNull();
       expect(node.list).toBeNull();
@@ -292,15 +292,15 @@ describe('DoublyLinkedList', () => {
 
   test('find', () => {
     const values = [1, 2, 3];
-    values.forEach(item => list.add(item));
+    values.forEach((item) => list.add(item));
 
-    values.forEach(item => expect(list.find(item)?.value).toBe(item));
+    values.forEach((item) => expect(list.find(item)?.value).toBe(item));
     expect(list.find(0)).toBeNull();
   });
 
   test('toArray', () => {
     const arr = [1, 2, 5];
-    arr.forEach(item => {
+    arr.forEach((item) => {
       list.add(item);
     });
 
@@ -323,7 +323,7 @@ describe('DoublyLinkedList', () => {
   test('iterator', () => {
     function getArrayFromIteratedList(arr: number[]) {
       list = new DoublyLinkedList<number>();
-      arr.forEach(item => list.add(item));
+      arr.forEach((item) => list.add(item));
       const listArray = [];
       for (const node of list) {
         listArray.push(node?.value);

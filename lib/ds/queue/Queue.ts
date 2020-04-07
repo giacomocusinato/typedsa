@@ -1,7 +1,6 @@
 import bind from 'bind-decorator';
-import { InvalidOperationError } from '../../errors';
-import { LinkedList } from '../linked-list/LinkedList';
-import { LinkedListNode } from '../linked-list/LinkedListNode';
+import { InvalidOperationError } from '~/errors';
+import { LinkedList, LinkedListNode } from '..';
 
 /**
  * Represents a first-in, first-out collection of objects.

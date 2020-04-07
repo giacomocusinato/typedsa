@@ -1,5 +1,5 @@
-import { ArgumentNullError } from '../../errors';
-import { Comparator } from '../../utils/comparator/Comparator';
+import { ArgumentNullError } from '~/errors';
+import { Comparator } from '~/utils';
 import bubbleSort from './bubbleSort';
 import insertionSort from './insertionSort';
 import mergeSort from './mergeSort';

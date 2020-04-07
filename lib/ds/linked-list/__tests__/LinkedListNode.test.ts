@@ -1,5 +1,5 @@
-import { LinkedListNode } from '../LinkedListNode';
 import { LinkedList } from '../LinkedList';
+import { LinkedListNode } from '../LinkedListNode';
 
 describe('LinkedList', () => {
   test('construct - empty', () => {

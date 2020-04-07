@@ -1,4 +1,4 @@
-import { LinkedList } from './LinkedList';
+import { LinkedList } from '~/ds';
 
 /**
  * Represents a node in a LinkedList<T>. This class cannot be inherited.

@@ -1,6 +1,5 @@
-import { InvalidOperationError } from '../../../errors';
-import { LinkedList } from '../../linked-list/LinkedList';
-import { Queue } from '../Queue';
+import { Queue } from '~/ds';
+import { InvalidOperationError } from '~/errors';
 
 describe('Queue', () => {
   let queue: Queue<number>;

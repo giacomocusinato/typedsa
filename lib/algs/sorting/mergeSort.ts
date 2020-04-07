@@ -1,4 +1,4 @@
-import { Comparator } from '../../../utils/comparator/Comparator';
+import { Comparator } from '~/utils';
 
 /**
  * Merge sort is an efficient, general-purpose, comparison-based sorting algorithm based on the divide and conquer paradigm.

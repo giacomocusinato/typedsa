@@ -1,4 +1,4 @@
-import { Comparator } from '../../../utils/comparator/Comparator';
+import { Comparator } from '~/utils';
 
 /**
  * Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list,

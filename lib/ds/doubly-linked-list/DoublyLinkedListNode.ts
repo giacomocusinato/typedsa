@@ -1,4 +1,4 @@
-import { DoublyLinkedList } from './DoublyLinkedList';
+import { DoublyLinkedList } from '~/ds';
 
 /**
  * Represents a node in a DoublyLinkedList<T>. This class cannot be inherited.

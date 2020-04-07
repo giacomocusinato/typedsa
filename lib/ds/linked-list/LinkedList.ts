@@ -1,7 +1,6 @@
 import bind from 'bind-decorator';
-import { ArgumentNullError, InvalidOperationError } from '../../errors';
-import { Collection } from '../Collection';
-import { LinkedListNode } from './LinkedListNode';
+import { Collection, LinkedListNode } from '~/ds';
+import { ArgumentNullError, InvalidOperationError } from '~/errors';
 
 /**
  * Represents a doubly linked list.
