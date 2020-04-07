@@ -1,3 +1,5 @@
+import { Comparator } from '../../../utils/comparator/Comparator';
+
 /**
  * Merge sort is an efficient, general-purpose, comparison-based sorting algorithm based on the divide and conquer paradigm.
  * @remarks
@@ -8,7 +10,7 @@
  *
  * See lib/data-structures/linked-list/LinkedList.sort for a LinkedList implementation of merge sort.
  */
-export default function <T>(array: T[]) {
+export default function <T>(array: T[], compare: Comparator<T>) {
   const arr = [...array];
 
   function mergeSort(array: T[]): T[] {
@@ -26,8 +28,8 @@ export default function <T>(array: T[]) {
     let rightIndex = 0;
     for (let i = 0; i < ordered.length; ++i) {
       if (
-        rightIndex === rightArray.length ||
-        leftArray[leftIndex] <= rightArray[rightIndex]
+        leftIndex < leftArray.length &&
+        compare.lte(leftArray[leftIndex], rightArray[rightIndex])
       ) {
         ordered[i] = leftArray[leftIndex];
         leftIndex++;
@@ -38,6 +40,5 @@ export default function <T>(array: T[]) {
     }
     return ordered;
   }
-
   return mergeSort(arr);
 }

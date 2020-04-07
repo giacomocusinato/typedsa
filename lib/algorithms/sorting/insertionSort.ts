@@ -4,16 +4,12 @@ import { Comparator } from '../../../utils/comparator/Comparator';
  * Insertion sort is a simple sorting algorithm that builds the final sorted array (or list) one item at a time.
  * @remarks
  * Best-case performance	O(n) comparisons, O(1) swaps;
- * Worst-case performance	О(n2) comparisons and swaps;
- * Average performance	О(n2) comparisons and swaps;
+ * Worst-case performance	О(n^2) comparisons and swaps;
+ * Average performance	О(n^2) comparisons and swaps;
  * Space complexity	О(1). (Example is O(n) since we don't want to mutete the original array)
  */
-export default function <T>(array: T[], compare: Comparator): T[] {
+export default function <T>(array: T[], compare: Comparator<T>): T[] {
   const arr = [...array];
-
-  if (arr.length < 2) {
-    return arr;
-  }
 
   for (let j = 1; j < arr.length; ++j) {
     const key = arr[j];

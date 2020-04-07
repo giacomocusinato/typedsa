@@ -1,9 +1,12 @@
-import { Comparator } from '../../utils/comparator/Comparator';
-import sortingAlgorithms from './sorting-algorithms';
 import { ArgumentNullError } from '../../errors';
+import { Comparator } from '../../utils/comparator/Comparator';
+import bubbleSort from './bubbleSort';
+import insertionSort from './insertionSort';
+import mergeSort from './mergeSort';
 
 export enum SORTING_TYPES {
   INSERTION_SORT,
+  BUBBLE_SORT,
   MERGE_SORT,
 }
 
@@ -19,15 +22,23 @@ export class Sorter {
     sortingType: SORTING_TYPES,
     comparator: Comparator = new Comparator()
   ) {
-    return Sorter.getSortingAlgorithm(sortingType)(array, comparator);
+    const sortingAlgorithm = Sorter.getSortingAlgorithm(sortingType);
+
+    if (array.length < 2) {
+      return array;
+    }
+
+    return sortingAlgorithm(array, comparator);
   }
 
   private static getSortingAlgorithm(sortingType: SORTING_TYPES) {
     switch (sortingType) {
       case SORTING_TYPES.INSERTION_SORT:
-        return sortingAlgorithms.insertionSort;
+        return insertionSort;
+      case SORTING_TYPES.BUBBLE_SORT:
+        return bubbleSort;
       case SORTING_TYPES.MERGE_SORT:
-        return sortingAlgorithms.mergeSort;
+        return mergeSort;
       default:
         throw new ArgumentNullError('sortingType');
     }
