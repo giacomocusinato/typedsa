@@ -4,10 +4,18 @@
   "description": "Data Structures and Algorithms in Typescript",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage"
   },
   "jest": {
-    "preset": "ts-jest"
+    "preset": "ts-jest",
+    "moduleNameMapper": {
+      "^~/ds$": "<rootDir>/lib/ds/index.ts",
+      "^~/algs$": "<rootDir>/lib/algs/index.ts",
+      "^~/errors$": "<rootDir>/lib/errors/index.ts",
+      "^~/utils$": "<rootDir>/lib/utils/index.ts"
+    }
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
