@@ -70,7 +70,7 @@ const sortedAgain: string[] = Sorter.sort(
 
 ## Contrubuting
 
-Althow this project has been created mostly for studying purposes, I'd love some contrubution. Just try to be consistent with the project structure, testing, and tsdocs conventions.
+Althow this project has been created mostly for studying purposes, I'd love some contrubutions. Just try to be consistent with the project structure, testing, and tsdocs conventions.
 
 ### Testing
 
