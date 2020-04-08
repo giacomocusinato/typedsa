@@ -51,4 +51,9 @@ describe('Sorter', () => {
     testWithDefaultComparator(SORTING_TYPES.MERGE_SORT);
     testWithCustomComparator(SORTING_TYPES.MERGE_SORT);
   });
+
+  test('quick sort', () => {
+    testWithDefaultComparator(SORTING_TYPES.QUICK_SORT);
+    // testWithCustomComparator(SORTING_TYPES.QUICK_SORT);
+  });
 });

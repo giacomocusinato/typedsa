@@ -3,11 +3,13 @@ import { Comparator } from '~/utils';
 import bubbleSort from './bubbleSort';
 import insertionSort from './insertionSort';
 import mergeSort from './mergeSort';
+import quickSort from './quickSort';
 
 export enum SORTING_TYPES {
   INSERTION_SORT,
   BUBBLE_SORT,
   MERGE_SORT,
+  QUICK_SORT,
 }
 
 export class Sorter {
@@ -39,6 +41,8 @@ export class Sorter {
         return bubbleSort;
       case SORTING_TYPES.MERGE_SORT:
         return mergeSort;
+      case SORTING_TYPES.QUICK_SORT:
+        return quickSort;
       default:
         throw new ArgumentNullError('sortingType');
     }
