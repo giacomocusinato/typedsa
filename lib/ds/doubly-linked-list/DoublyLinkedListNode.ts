@@ -1,7 +1,7 @@
 import { DoublyLinkedList } from '~/ds';
 
 /**
- * Represents a node in a DoublyLinkedList<T>. This class cannot be inherited.
+ * Represents a node in a DoublyLinkedList<T>.
  * @template T Specifies the element type of the linked list.
  */
 export class DoublyLinkedListNode<T> {
@@ -23,7 +23,6 @@ export class DoublyLinkedListNode<T> {
   public list: DoublyLinkedList<T> | null = null;
 
   /**
-   * The number of nodes actually contained in the DoublyLinkedList<T>.
    * @constructor
    * @param {T} value - The value contained in the node.
    */

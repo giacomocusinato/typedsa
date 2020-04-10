@@ -1,7 +1,7 @@
 import { LinkedList } from '~/ds';
 
 /**
- * Represents a node in a LinkedList<T>. This class cannot be inherited.
+ * Represents a node in a LinkedList<T>.
  * @template T Specifies the element type of the linked list.
  */
 export class LinkedListNode<T> {
@@ -17,7 +17,6 @@ export class LinkedListNode<T> {
   public list: LinkedList<T> | null = null;
 
   /**
-   * The number of nodes actually contained in the LinkedList<T>.
    * @constructor
    * @param {T} value - The value contained in the node.
    */
