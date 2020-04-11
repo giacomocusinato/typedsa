@@ -5,3 +5,6 @@ export { LinkedList } from './linked-list/LinkedList';
 export { LinkedListNode } from './linked-list/LinkedListNode';
 export { Queue } from './queue/Queue';
 export { Stack } from './stack/Stack';
+export { Heap } from './heap/Heap';
+export { MaxHeap } from './heap/MaxHeap';
+export { MinHeap } from './heap/MinHeap';
