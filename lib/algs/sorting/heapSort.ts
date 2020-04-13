@@ -1,9 +1,9 @@
 import { Comparator } from '~/utils';
 
 /**
- * Like Merge Sort, QuickSort is a Divide and Conquer algorithm. It picks an element as pivot and partitions the given array around the picked pivot.
+ * Heap sort is a comparison based sorting technique based on Binary Heap data structure.
  * @remarks
- * Worst-case performance	O(n^2)
+ * Worst-case performance	O(n*log(n))
  * Best-case performance	O(n*log(n))
  * Average performance	O(n*log(n))
  * Worst-case space complexity	О(1)
