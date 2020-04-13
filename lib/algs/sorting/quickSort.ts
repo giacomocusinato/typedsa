@@ -22,7 +22,7 @@ export default function <T>(array: T[], compare: Comparator<T>) {
     const pivot = arr[high];
     let i = low - 1;
     for (let j = low; j < high; ++j) {
-      if (compare.lt(arr[j], pivot)) {
+      if (compare.lte(arr[j], pivot)) {
         i++;
         const temp = arr[i];
         arr[i] = arr[j];

@@ -4,12 +4,14 @@ import bubbleSort from './bubbleSort';
 import insertionSort from './insertionSort';
 import mergeSort from './mergeSort';
 import quickSort from './quickSort';
+import heapSort from './heapSort';
 
 export enum SORTING_TYPES {
   INSERTION_SORT,
   BUBBLE_SORT,
   MERGE_SORT,
   QUICK_SORT,
+  HEAP_SORT,
 }
 
 export class Sorter {
@@ -43,6 +45,8 @@ export class Sorter {
         return mergeSort;
       case SORTING_TYPES.QUICK_SORT:
         return quickSort;
+      case SORTING_TYPES.HEAP_SORT:
+        return heapSort;
       default:
         throw new ArgumentNullError('sortingType');
     }

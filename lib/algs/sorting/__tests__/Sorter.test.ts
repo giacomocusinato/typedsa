@@ -17,7 +17,7 @@ describe('Sorter', () => {
       }
       return a.length > b.length ? 1 : -1;
     };
-    const array = ['foo', 'bar', 'spam', 'mighty', 'extralong'];
+    const array = ['go', 'java', 'typescript', 'rust', 'python'];
     const sortedArray = [...array].sort(compareFn);
     const result = Sorter.sort(array, algorithm, new Comparator(compareFn));
     expect(result).toMatchObject(sortedArray);
@@ -54,6 +54,11 @@ describe('Sorter', () => {
 
   test('quick sort', () => {
     testWithDefaultComparator(SORTING_TYPES.QUICK_SORT);
-    // testWithCustomComparator(SORTING_TYPES.QUICK_SORT);
+    testWithCustomComparator(SORTING_TYPES.QUICK_SORT);
+  });
+
+  test('heap sort', () => {
+    testWithDefaultComparator(SORTING_TYPES.HEAP_SORT);
+    testWithCustomComparator(SORTING_TYPES.HEAP_SORT);
   });
 });

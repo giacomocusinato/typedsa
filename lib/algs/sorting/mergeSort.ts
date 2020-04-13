@@ -23,21 +23,27 @@ export default function <T>(array: T[], compare: Comparator<T>) {
   }
 
   function merge(leftArray: T[], rightArray: T[]): T[] {
-    const ordered: T[] = new Array(leftArray.length + rightArray.length);
+    const ordered: T[] = [];
     let leftIndex = 0;
     let rightIndex = 0;
-    for (let i = 0; i < ordered.length; ++i) {
-      if (
-        leftIndex < leftArray.length &&
-        compare.lte(leftArray[leftIndex], rightArray[rightIndex])
-      ) {
-        ordered[i] = leftArray[leftIndex];
+    while (leftIndex + rightIndex < leftArray.length + rightArray.length) {
+      const leftItem = leftArray[leftIndex];
+      const rightItem = rightArray[rightIndex];
+      if (leftItem == null) {
+        ordered.push(rightItem);
+        rightIndex++;
+      } else if (rightItem == null) {
+        ordered.push(leftItem);
+        leftIndex++;
+      } else if (compare.lte(leftItem, rightItem)) {
+        ordered.push(leftItem);
         leftIndex++;
       } else {
-        ordered[i] = rightArray[rightIndex];
+        ordered.push(rightItem);
         rightIndex++;
       }
     }
+
     return ordered;
   }
   return mergeSort(arr);
