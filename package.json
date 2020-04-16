@@ -6,7 +6,7 @@
   "types": "dist/",
   "prepublish": "tsc",
   "scripts": {
-    "test": "jest",
+    "test": "",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage"
   },
