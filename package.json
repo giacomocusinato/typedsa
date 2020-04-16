@@ -2,7 +2,9 @@
   "name": "typedsa",
   "version": "1.0.0",
   "description": "Data Structures and Algorithms in Typescript",
-  "main": "index.js",
+  "main": "dist/",
+  "types": "dist/",
+  "prepublish": "tsc",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
