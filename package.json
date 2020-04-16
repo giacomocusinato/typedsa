@@ -2,8 +2,8 @@
   "name": "typedsa",
   "version": "0.0.2",
   "description": "Data Structures and Algorithms in Typescript",
-  "main": "dist/*",
-  "types": "dist/*",
+  "main": "dist/**/*",
+  "types": "dist/**/*.d.ts",
   "prepublish": "tsc",
   "scripts": {
     "test": "",
