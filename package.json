@@ -10,11 +10,12 @@
   },
   "jest": {
     "preset": "ts-jest",
+    "rootDir": "lib",
     "moduleNameMapper": {
-      "^~/ds$": "<rootDir>/lib/ds/index.ts",
-      "^~/algs$": "<rootDir>/lib/algs/index.ts",
-      "^~/errors$": "<rootDir>/lib/errors/index.ts",
-      "^~/utils$": "<rootDir>/lib/utils/index.ts"
+      "^~/ds$": "<rootDir>/ds/index.ts",
+      "^~/algs$": "<rootDir>/algs/index.ts",
+      "^~/errors$": "<rootDir>/errors/index.ts",
+      "^~/utils$": "<rootDir>/utils/index.ts"
     }
   },
   "devDependencies": {
