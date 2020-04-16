@@ -1,4 +1,4 @@
-import { MaxHeap } from '../MaxHeap';
+import { MaxHeap } from '~/ds';
 
 describe('MaxHeap', () => {
   test('contructor', () => {

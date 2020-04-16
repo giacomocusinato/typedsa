@@ -1,3 +1,5 @@
 describe('BinarySearchTreeNode', () => {
-  test('contructor', () => {});
+  test('contructor', () => {
+    expect(true).toBeTruthy();
+  });
 });

@@ -1,13 +1,12 @@
 import bind from 'bind-decorator';
-import { Collection, LinkedListNode } from '~/ds';
+import { LinkedListNode } from '~/ds';
 import { ArgumentNullError, InvalidOperationError } from '~/errors';
 
 /**
  * Represents a doubly linked list.
  * @template T Specifies the element type of the linked list.
- * @implements {Collection<T>}
  */
-export class LinkedList<T> implements Collection<T> {
+export class LinkedList<T> {
   /**
    * Generates a LinkedList<T> from an array containing values of type T.
    * @param {T[]} array - An array containing elements of type T.

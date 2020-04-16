@@ -1,4 +1,4 @@
-import { MaxHeap, MinHeap } from '~/ds';
+import { MaxHeap } from '~/ds';
 import { InvalidOperationError } from '~/errors';
 
 describe('Heap', () => {
