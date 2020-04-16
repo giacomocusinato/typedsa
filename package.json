@@ -1,6 +1,6 @@
 {
   "name": "typedsa",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Data Structures and Algorithms in Typescript",
   "main": "dist/",
   "types": "dist/",
