@@ -1,5 +1,5 @@
-import { MaxHeap } from '~/ds';
-import { InvalidOperationError } from '~/errors';
+import { MaxHeap } from 'typedsa/ds';
+import { InvalidOperationError } from 'typedsa/errors';
 
 describe('Heap', () => {
   test('contructor', () => {});

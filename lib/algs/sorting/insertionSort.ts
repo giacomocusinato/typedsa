@@ -1,4 +1,4 @@
-import { Comparator } from '~/utils';
+import { Comparator } from 'typedsa/utils';
 
 /**
  * Insertion sort is a simple sorting algorithm that builds the final sorted array (or list) one item at a time.

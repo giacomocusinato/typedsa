@@ -1,6 +1,6 @@
 import bind from 'bind-decorator';
-import { LinkedListNode } from '~/ds';
-import { ArgumentNullError, InvalidOperationError } from '~/errors';
+import { LinkedListNode } from 'typedsa/ds';
+import { ArgumentNullError, InvalidOperationError } from 'typedsa/errors';
 
 /**
  * Represents a doubly linked list.

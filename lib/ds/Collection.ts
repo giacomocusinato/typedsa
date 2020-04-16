@@ -1,4 +1,4 @@
-import { Comparator } from '~/utils';
+import { Comparator } from 'typedsa/utils';
 
 /**
  * Defines methods to manipulate generic collections.

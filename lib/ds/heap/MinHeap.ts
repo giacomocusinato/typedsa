@@ -1,4 +1,4 @@
-import { Heap } from '~/ds';
+import { Heap } from 'typedsa/ds';
 
 /**
  * Represents a max heap.

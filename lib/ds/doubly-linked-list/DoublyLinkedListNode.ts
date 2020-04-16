@@ -1,4 +1,4 @@
-import { DoublyLinkedList } from '~/ds';
+import { DoublyLinkedList } from 'typedsa/ds';
 
 /**
  * Represents a node in a DoublyLinkedList<T>.

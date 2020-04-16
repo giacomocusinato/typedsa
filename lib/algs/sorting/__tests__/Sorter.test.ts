@@ -1,6 +1,6 @@
-import { Sorter, SORTING_TYPES } from '~/algs';
-import { Comparator } from '~/utils';
-import { ArgumentNullError } from '~/errors';
+import { Sorter, SORTING_TYPES } from 'typedsa/algs';
+import { Comparator } from 'typedsa/utils';
+import { ArgumentNullError } from 'typedsa/errors';
 
 describe('Sorter', () => {
   function testWithDefaultComparator(algorithm: SORTING_TYPES) {

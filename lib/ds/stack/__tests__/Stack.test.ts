@@ -1,5 +1,5 @@
-import { LinkedList, Stack } from '~/ds';
-import { InvalidOperationError } from '~/errors';
+import { LinkedList, Stack } from 'typedsa/ds';
+import { InvalidOperationError } from 'typedsa/errors';
 
 describe('Stack', () => {
   let stack: Stack<number>;

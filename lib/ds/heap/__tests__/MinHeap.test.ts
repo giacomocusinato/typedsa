@@ -1,4 +1,4 @@
-import { MinHeap } from '~/ds';
+import { MinHeap } from 'typedsa/ds';
 
 describe('MinHeap', () => {
   test('contructor', () => {

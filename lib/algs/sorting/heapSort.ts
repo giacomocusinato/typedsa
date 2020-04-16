@@ -1,4 +1,4 @@
-import { Comparator } from '~/utils';
+import { Comparator } from 'typedsa/utils';
 
 /**
  * Heap sort is a comparison based sorting technique based on Binary Heap data structure.

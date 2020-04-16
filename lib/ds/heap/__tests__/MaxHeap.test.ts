@@ -1,4 +1,4 @@
-import { MaxHeap } from '~/ds';
+import { MaxHeap } from 'typedsa/ds';
 
 describe('MaxHeap', () => {
   test('contructor', () => {

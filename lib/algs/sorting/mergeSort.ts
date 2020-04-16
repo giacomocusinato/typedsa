@@ -1,4 +1,4 @@
-import { Comparator } from '~/utils';
+import { Comparator } from 'typedsa/utils';
 
 /**
  * Merge sort is an efficient, general-purpose, comparison-based sorting algorithm based on the divide and conquer paradigm.

@@ -1,4 +1,4 @@
-import { Comparator } from '~/utils';
+import { Comparator } from 'typedsa/utils';
 
 /**
  * Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list,

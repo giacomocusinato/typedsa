@@ -1,5 +1,5 @@
 import bind from 'bind-decorator';
-import { InvalidOperationError } from '~/errors';
+import { InvalidOperationError } from 'typedsa/errors';
 import { LinkedList, LinkedListNode } from '..';
 
 /**

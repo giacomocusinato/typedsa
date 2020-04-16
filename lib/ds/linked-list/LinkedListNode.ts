@@ -1,4 +1,4 @@
-import { LinkedList } from '~/ds';
+import { LinkedList } from 'typedsa/ds';
 
 /**
  * Represents a node in a LinkedList<T>.

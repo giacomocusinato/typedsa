@@ -2,8 +2,8 @@
   "name": "typedsa",
   "version": "0.0.1",
   "description": "Data Structures and Algorithms in Typescript",
-  "main": "dist/",
-  "types": "dist/",
+  "main": "dist/*",
+  "types": "dist/*",
   "prepublish": "tsc",
   "scripts": {
     "test": "",
@@ -13,10 +13,10 @@
   "jest": {
     "preset": "ts-jest",
     "moduleNameMapper": {
-      "^~/ds$": "<rootDir>/lib/ds/index.ts",
-      "^~/algs$": "<rootDir>/lib/algs/index.ts",
-      "^~/errors$": "<rootDir>/lib/errors/index.ts",
-      "^~/utils$": "<rootDir>/lib/utils/index.ts"
+      "^typedsa/ds$": "<rootDir>/lib/ds/index.ts",
+      "^typedsa/algs$": "<rootDir>/lib/algs/index.ts",
+      "^typedsa/errors$": "<rootDir>/lib/errors/index.ts",
+      "^typedsa/utils$": "<rootDir>/lib/utils/index.ts"
     },
     "roots": [
       "<rootDir>/lib"
@@ -29,6 +29,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "bind-decorator": "^1.0.11"
+    "bind-decorator": "^1.0.11",
+    "rxjs": "^6.5.5"
   }
 }

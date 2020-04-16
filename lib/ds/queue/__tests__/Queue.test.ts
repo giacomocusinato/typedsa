@@ -1,5 +1,5 @@
-import { Queue } from '~/ds';
-import { InvalidOperationError } from '~/errors';
+import { Queue } from 'typedsa/ds';
+import { InvalidOperationError } from 'typedsa/errors';
 
 describe('Queue', () => {
   let queue: Queue<number>;
